@@ -2,7 +2,14 @@
 export default {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        bg: "#8900B9",
+      },
+      fontFamily: {
+        syne: "Syne"
+      }
+    },
   },
   plugins: [require("tailwindcss"), require("autoprefixer")],
   variants: {},
