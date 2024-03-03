@@ -29,7 +29,7 @@ function ResetPassword() {
                     />
                 </form>
                 <span className="flex items-center justify-center w-full">
-                    <p className="font-syne text-[18px]">Don’t have an account?<span className="text-primary" onClick={() => { navigate("/signUp-page") }}>Sign up</span></p>
+                    <p className="font-syne text-[18px]">Don’t have an account?<span className="text-primary cursor-pointer" onClick={() => { navigate("/signUp-page") }}>Sign up</span></p>
                 </span>
             </div>
         </section>

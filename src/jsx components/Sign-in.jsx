@@ -33,8 +33,8 @@ function SignIn() {
                         placeholder="*********"
                     // onChange={(e) => setPassword(e.target.value)}
                     />
-                    <span className="flex justify-end w-full">
-                        <p className="font-syne font-bold text-[18px] text-red-600" onClick={() => { navigate("/resetPassword-page") }}>Forgot password</p>
+                    <span className="flex justify-end w-full max-w-[500px]">
+                        <p className="font-syne font-bold text-[18px] text-red-600 cursor-pointer" onClick={() => { navigate("/resetPassword-page") }}>Forgot password</p>
                     </span>
                     <ButtonProps
                         label="Log in"
@@ -56,7 +56,7 @@ function SignIn() {
                     />
                 </div>
                 <span className="flex items-center justify-center w-full">
-                    <p className="font-syne text-[18px]">Don’t have an account?<span className="text-primary" onClick={() => { navigate("/signUp-page") }}>Sign up</span></p>
+                    <p className="font-syne text-[18px]">Don’t have an account?<span className="text-primary cursor-pointer" onClick={() => { navigate("/signUp-page") }}>Sign up</span></p>
                 </span>
             </div>
         </section>
