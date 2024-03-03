@@ -54,11 +54,11 @@ function IntroPage() {
                     />
                 </div>
             ) : (
-                <div className="flex flex-col justify-center items-center w-full h-[100vh] gap-2 overflow-hidden bg-bg">
+                <div className="flex flex-col justify-center items-center w-full h-[100vh] gap-2 overflow-hidden bg-primary">
                     {introPageIcon &&
                         <img src={worldImg1} alt="world image" />
                     }
-                    <h1 className="text-white font-syne font-bold text-[32px] ">Trippa</h1>
+                    <h1 className="text-white font-syne font-bold text-[32px]">Trippa</h1>
                 </div>
             )
             }

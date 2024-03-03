@@ -4,7 +4,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        bg: "#8900B9",
+        primary: "#8900B9",
+        radioBg: "#D9D9D9",
+        inputBorder: "#E0E0E0",
+        textColor: "#404040",
+        textColor1: "#C6C6C6",
       },
       fontFamily: {
         syne: "Syne"
