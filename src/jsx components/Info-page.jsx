@@ -24,25 +24,28 @@ function InfoPage() {
 
     return (
         <section className="flex flex-col items-center w-full h-full mt-10">
-            <h1 className="font-syne font-bold text-[24px] h-[22vh]">Trippa</h1>
+            <h1 className="font-syne font-extrabold text-[24px] h-[22vh]">Trippa</h1>
             <div className="flex flex-col items-center justify-between w-full h-[70vh]">
                 <div className="flex flex-col items-center justify-center gap-5">
                     <img src={images[currentImageIndex]} alt="onboarding image" width={200} height={200} />
-                    <p className="font-syne font-bold text-[20px] text-center w-[85%]">Get the latest and trendy places to visit</p>
+                    <p className="font-syne font-semibold text-[20px] text-center w-[85%]">Get the latest and trendy places to visit</p>
                 </div>
                 <span className="flex gap-4">
                     {images.map((_, index) => (
                         <label
                             key={`label${index + 1}`}
                             htmlFor={`slide${index + 1}`}
-                            className={`h-3 border-2 border-solid rounded-full cursor-pointer ${index === currentImageIndex ? "bg-primary w-14" : "bg-radioBg w-3"}`}
+                            className={`h-2 border-2 border-solid rounded-full cursor-pointer ${index === currentImageIndex ? "bg-primary w-14" : "bg-radioBg w-2"}`}
                             onClick={() => handleLabelClick(index)}
                         ></label>
                     ))}
                 </span>
                 <div className='w-full flex flex-col items-center gap-5'>
-                    <ButtonProps label={isLastImage ? "Let’s Go" : "Next"} onClick={isLastImage ? handleGo : handleNextClick} />
-                    {isLastImage ? null : <h1 className="font-syne font-bold text-[20px] text-primary">Skip</h1>}
+                    <ButtonProps label={isLastImage ? "Let’s Go" : "Next"}
+                        onClick={isLastImage ? handleGo : handleNextClick}
+                        className="bg-primary"
+                    />
+                    {isLastImage ? null : <h1 className="font-syne font-semibold text-[18px] text-primary cursor-pointer" onClick={() => { setCurrentImageIndex(images.length - 1) }} >Skip</h1>}
                 </div>
             </div>
         </section>

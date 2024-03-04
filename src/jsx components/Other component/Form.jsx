@@ -16,7 +16,7 @@ export const InputProps = (props) => {
             <input
                 type={type === "password" ? (isPasswordVisible ? "text" : "password") : type}
                 placeholder={placeholder}
-                className="w-full h-[50px] px-2 bg-transparent outline-none border-2 border-solid border-inputBorder rounded-[8px] placeholder:text-[16px]"
+                className={`w-full h-[50px] px-2 bg-transparent outline-none border-2 border-solid border-inputBorder rounded-[8px] placeholder:text-[16px] ${!value && 'border-disable opacity-[0.4]'}`}
                 name={name}
                 id={id}
                 value={value}
@@ -30,7 +30,7 @@ export const InputProps = (props) => {
                     <img
                         src={isPasswordVisible ? passwordOn : passwordOn}
                         alt="password-view-icon"
-                        className=" absolute right-5 bottom-4 cursor-pointer"
+                        className={`absolute right-5 bottom-4 cursor-pointer ${!value && 'opacity-[0.4]'}`}
                         onClick={togglePasswordVisibility}
                     />
                 )}
@@ -44,11 +44,11 @@ export function LoginOption (props) {
 
     return (
         <>
-            <div className="w-full h-[55px] max-w-[500px] rounded-[8px] border-2 border-solid border-inputBorder flex items-center justify-center gap-5"
+            <div className="w-full h-[55px] max-w-[500px] rounded-[8px] border-2 border-solid border-inputBorder flex items-center justify-center gap-5 cursor-pointer"
                 onClick={onClick}
             >
                 <img src={src} alt="logo" width={25} height={25}/>
-                <p className="font-syne font-bold text-[18px]">{label}</p>
+                <p className="font-syne text-[18px]">{label}</p>
             </div>
         </>
     );
@@ -59,7 +59,7 @@ function ButtonProps (props) {
 
     return (
         <>
-            <button className={`w-[90%] h-[50px] max-w-[500px] rounded-[8px] bg-primary text-white font-syne font-bold text-[20px] ${className}`}
+            <button className={`w-[90%] h-[50px] max-w-[500px] rounded-[8px] text-white font-syne font-medium text-[18px] cursor-pointer ${className}`}
                 onClick={onClick}
                 disabled={disabled}
             >
@@ -68,5 +68,7 @@ function ButtonProps (props) {
         </>
     );
 }
+
+
 
 export default ButtonProps;

@@ -9,6 +9,7 @@ export default {
         inputBorder: "#E0E0E0",
         textColor: "#404040",
         textColor1: "#C6C6C6",
+        disable: "#F8F8F8"
       },
       fontFamily: {
         syne: "Syne"
