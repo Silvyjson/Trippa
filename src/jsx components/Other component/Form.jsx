@@ -55,13 +55,14 @@ export function LoginOption (props) {
 }
 
 function ButtonProps (props) {
-    const { label, onClick, disabled,className } = props;
+    const { label, onClick, disabled,className , type } = props;
 
     return (
         <>
             <button className={`w-[90%] h-[50px] max-w-[500px] rounded-[8px] text-white font-syne font-medium text-[18px] cursor-pointer ${className}`}
                 onClick={onClick}
                 disabled={disabled}
+                type={type}
             >
                 {label}
             </button>

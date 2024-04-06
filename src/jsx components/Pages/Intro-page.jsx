@@ -1,4 +1,4 @@
-import { worldImg, worldImg1 } from "../assets";
+import { worldImg, worldImg1 } from "../../assets";
 import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 

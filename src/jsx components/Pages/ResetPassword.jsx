@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import ButtonProps, { InputProps } from "./Other component/Form";
+import ButtonProps, { InputProps } from "../Other component/Form";
 
 function ResetPassword() {
     const [email, setEmail] = useState("");

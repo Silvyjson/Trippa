@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import ButtonProps from './Other component/Form';
-import { onboardingImg, onboardingImg1, onboardingImg2, onboardingImg3 } from '../assets';
+import ButtonProps from '../Other component/Form';
+import { onboardingImg, onboardingImg1, onboardingImg2, onboardingImg3 } from '../../assets';
 
 function InfoPage() {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
