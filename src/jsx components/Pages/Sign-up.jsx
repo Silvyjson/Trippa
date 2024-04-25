@@ -5,44 +5,39 @@ import ButtonProps, { InputProps, LoginOption } from "../Other component/Form";
 import axios from "axios";
 
 function SignUp() {
-    const [name, setName] = useState("")
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [formData, setFormData] = useState({
+        email: "",
+        password: ""
+    });
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const navigate = useNavigate();
 
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
+
     const handleSignUpAuth = async (event) => {
         event.preventDefault();
-        setLoading(true)
+        setLoading(true);
 
         try {
-            const response = await axios.post('https://trippa-0a55.onrender.com/api/v1/register',
-                {
-                    name: name,
-                    email: email,
-                    password: password
-                }
-            )
-            console.log('sign up sucessful:', response.data)
+            const response = await axios.post('https://trippa.onrender.com/api/register', formData);
+            console.log('Sign up successful:', response.data);
+            navigate("/home-page");
         } catch (error) {
-            if (error.response && error.response.data && error.response.data.error) {
-                setError(error.response.data.error.message);
-                console.error(error.response.data.error.message);
-            } else {
-                setError('An unexpected error occurred. Please try again.');
-                console.error('Unexpected error:', error);
-            }
-            setLoading(false)
+            setError(error.response?.data?.error?.message || 'An unexpected error occurred. Please try again.');
+            console.error('Sign up error:', error);
         } finally {
-            setLoading(false)
+            setLoading(false);
         }
-    }
+    };
 
     return (
         <>
             {loading ? (
-                <p>loading...</p>
+                <p className="flex items-center justify-center h-[100vh] w-full">Loading...</p>
             ) : (
                 <section className="block mx-auto my-10 w-[90%]">
                     <div className="flex flex-col gap-10 sm:items-center">
@@ -50,29 +45,17 @@ function SignUp() {
                             <h1 className="font-syne font-bold text-[30px]">Welcome to Trippa</h1>
                             <p className="font-syne text-[20px] text-textColor">Sign up and start travelling the world</p>
                         </span>
-                        {error &&
-                            <p>{error.response.data.error.message}</p>
-                        }
-                        <form className=" flex flex-col gap-7 w-full items-start sm:items-center">
-                            <InputProps
-                                label="Full name"
-                                htmlFor="name"
-                                id="name"
-                                type="name"
-                                name="name"
-                                value={name}
-                                placeholder="Full name"
-                                onChange={(e) => setName(e.target.value)}
-                            />
+                        {error && <p>{error}</p>}
+                        <form className="flex flex-col gap-7 w-full items-start sm:items-center">
                             <InputProps
                                 label="Email"
                                 htmlFor="email"
                                 id="email"
                                 type="email"
                                 name="email"
-                                value={email}
-                                placeholder="@email.com"
-                                onChange={(e) => setEmail(e.target.value)}
+                                value={formData.email}
+                                placeholder="Email"
+                                onChange={handleChange}
                             />
                             <InputProps
                                 label="Password"
@@ -80,24 +63,24 @@ function SignUp() {
                                 id="password"
                                 type="password"
                                 name="password"
-                                value={password}
-                                placeholder="*********"
-                                onChange={(e) => setPassword(e.target.value)}
+                                value={formData.password}
+                                placeholder="Password"
+                                onChange={handleChange}
                             />
                             <ButtonProps
                                 label="Sign up"
-                                className={`w-full ${(!email || !password) ? 'bg-disable' : 'bg-primary'}`}
+                                className={`w-full ${(!formData.email || !formData.password) ? 'bg-disable' : 'bg-primary'}`}
                                 onClick={handleSignUpAuth}
-                                disabled={!email || !password}
+                                disabled={!formData.email || !formData.password}
                             />
                         </form>
                         <p className="font-syne text-[18px] sm:text-center">
-                            By creating an account, you agree with our Terms of Service and Privacy Policy.
+                            By creating an account, you agree with our Terms of Service and Privacy Policy.
                         </p>
                         <span className="flex items-center justify-center w-full">
-                            <h1 className="font-syne font-bold text-[20px] text-textColor1">OR</h1>
+                            <h1 className="font-syne font-bold text-[20px] text-gray_color">OR</h1>
                         </span>
-                        <div className=" flex flex-col gap-7 w-full items-start sm:items-center">
+                        <div className="flex flex-col gap-7 w-full items-start sm:items-center">
                             <LoginOption
                                 src={facebookIcon}
                                 label="Continue with Facebook"
@@ -118,5 +101,3 @@ function SignUp() {
 }
 
 export default SignUp;
-
-// hhhhhhhhhhh

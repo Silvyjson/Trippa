@@ -1,4 +1,5 @@
 import { useState } from "react";
+import PropTypes from "prop-types";
 import { passwordOn } from "../../assets";
 
 export const InputProps = (props) => {
@@ -39,6 +40,18 @@ export const InputProps = (props) => {
     );
 }
 
+InputProps.propTypes = {
+    placeholder: PropTypes.string,
+    type: PropTypes.string.isRequired,
+    htmlFor: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    value: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired,
+    disabled: PropTypes.bool,
+};
+
 export function LoginOption (props) {
     const { label, onClick, src } = props;
 
@@ -53,6 +66,12 @@ export function LoginOption (props) {
         </>
     );
 }
+
+LoginOption.propTypes = {
+    label: PropTypes.string.isRequired,
+    onClick: PropTypes.func,
+    src: PropTypes.string.isRequired,
+};
 
 function ButtonProps (props) {
     const { label, onClick, disabled,className , type } = props;
@@ -70,6 +89,13 @@ function ButtonProps (props) {
     );
 }
 
+ButtonProps.propTypes = {
+    label: PropTypes.string.isRequired,
+    onClick: PropTypes.func.isRequired,
+    disabled: PropTypes.bool,
+    className: PropTypes.string,
+    type: PropTypes.string,
+};
 
 
 export default ButtonProps;

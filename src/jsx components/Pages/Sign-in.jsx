@@ -5,38 +5,39 @@ import ButtonProps, { InputProps, LoginOption } from "../Other component/Form";
 import axios from "axios";
 
 function SignIn() {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const navigate = useNavigate();
+    const [formData, setFormData] = useState({
+        email: "",
+        password: ""
+    });
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    const navigate = useNavigate();
 
     const handleSignInAuth = async (event) => {
         event.preventDefault();
-        setLoading(true)
+        setLoading(true);
 
         try {
-            const response = await axios.post('https://trippa-0a55.onrender.com/api/v1/login',
-                {
-                    email: email,
-                    password: password
-                }
-            )
-            console.log('login sucessful:', response.data)
-            navigate('/home-page')
+            const response = await axios.post('https://trippa.onrender.com/api/login', {
+                name: formData.name,
+                email: formData.email,
+                password: formData.password
+            });
+            console.log('login successful:', response.data);
+
+            navigate("/home-page");
         } catch (error) {
             setError(error.response.data);
             console.error(error.response.data);
-            setLoading(false)
         } finally {
-            setLoading(false)
+            setLoading(false);
         }
     }
 
     return (
         <>
             {loading ? (
-                <p>loading...</p>
+                <p className="flex items-center justify-center h-[100vh] w-full">loading...</p>
             ) : (
                 <section className="block mx-auto my-10 w-[90%]">
                     <div className="flex flex-col gap-10 sm:items-center">
@@ -44,19 +45,17 @@ function SignIn() {
                             <h1 className="font-syne font-bold text-[30px]">Welcome back to Trippa</h1>
                             <p className="font-syne text-[20px] text-textColor">Log in and don’t miss out</p>
                         </span>
-                        {error &&
-                            <p>{error.response.data.error.message}</p>
-                        }
-                        <form className=" flex flex-col gap-7 w-full items-start sm:items-center">
+                        {error && <p>{error.response.data.error.message}</p>}
+                        <form className="flex flex-col gap-7 w-full items-start sm:items-center">
                             <InputProps
                                 label="Email"
                                 htmlFor="email"
                                 id="email"
                                 type="email"
                                 name="email"
-                                value={email}
+                                value={formData.email}
                                 placeholder="@email.com"
-                                onChange={(e) => setEmail(e.target.value)}
+                                onChange={(e) => setFormData({...formData, email: e.target.value})}
                             />
                             <InputProps
                                 label="Password"
@@ -64,24 +63,24 @@ function SignIn() {
                                 id="password"
                                 type="password"
                                 name="password"
-                                value={password}
+                                value={formData.password}
                                 placeholder="*********"
-                                onChange={(e) => setPassword(e.target.value)}
+                                onChange={(e) => setFormData({...formData, password: e.target.value})}
                             />
                             <span className="flex justify-end w-full max-w-[500px]">
                                 <p className="font-syne text-[18px] text-red-600 cursor-pointer" onClick={() => { navigate("/resetPassword-page") }}>Forgot password</p>
                             </span>
                             <ButtonProps
                                 label="Log in"
-                                className={`w-full ${(!email || !password) ? 'bg-disable' : 'bg-primary'}`}
+                                className={`w-full ${(!formData.email || !formData.password) ? 'bg-disable' : 'bg-primary'}`}
                                 onClick={handleSignInAuth}
-                                disabled={!email || !password}
+                                disabled={!formData.email || !formData.password}
                             />
                         </form>
                         <span className="flex items-center justify-center w-full">
-                            <h1 className="font-syne font-bold text-[20px] text-textColor1">OR</h1>
+                            <h1 className="font-syne font-bold text-[20px] text-gray_color">OR</h1>
                         </span>
-                        <div className=" flex flex-col gap-7 w-full items-start sm:items-center">
+                        <div className="flex flex-col gap-7 w-full items-start sm:items-center">
                             <LoginOption
                                 src={facebookIcon}
                                 label="Continue with Facebook"

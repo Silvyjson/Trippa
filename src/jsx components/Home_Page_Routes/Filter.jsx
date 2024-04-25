@@ -1,9 +1,11 @@
-import React from 'react'
+import { useRef } from 'react'
 import { calendar_icon, location_icon } from '../../assets'
 
 const Filter = () => {
+    const filterRef = useRef()
+
     return (
-        <div className='filter hidden flex-col gap-3 py-4 w-full bg-page_color rounded-bl-[20px] rounded-br-[20px] sm:flex-row'>
+        <div className='filter fixed bottom-0 hidden flex-col gap-3 p-[30px] w-full h-[60%] bg-page_color rounded-tl-[20px] rounded-tr-[20px] z-[1] lg:w-[1000px]' ref={filterRef}>
             <span className='w-full relative'>
                 <h3 className='text-primary' htmlFor="date">Dates</h3>
                 <img src={calendar_icon} alt="calendar icon" className='absolute bottom-[15px] left-[15px]' />

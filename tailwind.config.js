@@ -11,7 +11,7 @@ export default {
         radioBg: "#D9D9D9",
         inputBorder: "#E0E0E0",
         textColor: "#404040",
-        textColor1: "#C6C6C6",
+        gray_color: "#C6C6C6",
         disable: "#F8F8F8",
         search_input_color: "#F9FAFB",
       },
