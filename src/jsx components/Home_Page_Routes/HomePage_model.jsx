@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ActivitySection from './Home Page Data/ActivitySection';
 import HotelSection from './Home Page Data/HotelSection';
 import GuideSection from './Home Page Data/GuideSection';
-import ResturantSection from './Home Page Data/ResturantSection';
+import RestaurantSection from './Home Page Data/RestaurantSection';
 
 const HomePage_modelProps = ({ label, index, selectedOption, handleOptions }) => {
   return (
@@ -23,8 +23,14 @@ HomePage_modelProps.propTypes = {
   handleOptions: PropTypes.func.isRequired,
 };
 
-const HomePage_model = () => {
-  const [selectedOption, setSelectedOption] = useState(0);
+const HomePage_model = ({ activityData, hotelData, guideData, restaurantData }) => {
+  const [selectedOption, setSelectedOption] = useState(() => {
+    return parseInt(localStorage.getItem('selectedOption')) || 0;
+  });
+
+  useEffect(() => {
+    localStorage.setItem('selectedOption', selectedOption.toString());
+  }, [selectedOption]);
 
   const handleOptions = (index) => {
     setSelectedOption(index);
@@ -59,13 +65,20 @@ const HomePage_model = () => {
         />
       </div>
       <div>
-        {selectedOption === 0 && <ActivitySection />}
-        {selectedOption === 1 && <HotelSection />}
-        {selectedOption === 2 && <GuideSection />}
-        {selectedOption === 3 && <ResturantSection />}
+        {selectedOption === 0 && <ActivitySection activityData={activityData} />}
+        {selectedOption === 1 && <HotelSection hotelData={hotelData} />}
+        {selectedOption === 2 && <GuideSection guideData={guideData} />}
+        {selectedOption === 3 && <RestaurantSection restaurantData={restaurantData} />}
       </div>
     </section>
   );
+};
+
+HomePage_model.propTypes = {
+  activityData: PropTypes.array.isRequired,
+  hotelData: PropTypes.array.isRequired,
+  guideData: PropTypes.array.isRequired,
+  restaurantData: PropTypes.array.isRequired
 };
 
 export default HomePage_model;

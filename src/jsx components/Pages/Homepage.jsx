@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useRef, useEffect } from 'react';
 import { filterIcon, notification_bell, profileImg, searchIcon, waveEmoji } from '../../assets';
 import Footer_nav from '../Navigations/Footer_nav';
@@ -5,10 +6,10 @@ import Filter from '../Home_Page_Routes/Filter';
 import HomePage_model from '../Home_Page_Routes/HomePage_model';
 import HomePageNav from '../Navigations/MenuSlide';
 
-const Homepage = () => {
+const Homepage = ({ activityData, hotelData, guideData, restaurantData }) => {
     const filterRef = useRef(null);
     const menuRef = useRef(null);
-    
+
     useEffect(() => {
         const handleOutsideClick = (event) => {
             if (filterRef.current && !filterRef.current.contains(event.target)) {
@@ -66,13 +67,25 @@ const Homepage = () => {
                         <img src={filterIcon} alt="filter icon" onClick={handleShowFilter} className='w-[20px] cursor-pointer' />
                     </span>
                 </div>
-                <HomePageNav name={name}/>
-                <HomePage_model />
+                <HomePageNav name={name} />
+                <HomePage_model
+                    activityData={activityData}
+                    hotelData={hotelData}
+                    guideData={guideData}
+                    restaurantData={restaurantData}
+                />
                 <Footer_nav />
                 <Filter />
             </div>
         </section>
     );
+};
+
+Homepage.propTypes = {
+    activityData: PropTypes.array.isRequired,
+    hotelData: PropTypes.array.isRequired,
+    guideData: PropTypes.array.isRequired,
+    restaurantData: PropTypes.array.isRequired,
 };
 
 export default Homepage;
