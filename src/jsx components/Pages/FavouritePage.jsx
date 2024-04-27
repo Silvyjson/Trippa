@@ -15,7 +15,7 @@ const FavouritePage = () => {
     <section className='relative flex flex-col justify-center items-center h-full w-full'>
       <div className='w-full lg:w-[1000px]'>
         <Return_Arrow />
-        <div className='grid grid-cols-1 justify-center items-center gap-[15px] w-full h-full pt-[90px] px-[20px] sm:grid-cols-2'>
+        {/* <div className='grid grid-cols-1 justify-center items-center gap-[15px] w-full h-full pt-[90px] px-[20px] sm:grid-cols-2'>
           {box_model.map((item, index) => (
             <div key={index} className='flex flex-col gap-3 justify-center items-center rounded-[10px] py-[18px] px-[24px] bg-secondary box_size_1'>{item}
               <div className=' box_size_2 bg-highlight_purple rounded-[10px]' />
@@ -29,7 +29,7 @@ const FavouritePage = () => {
               </div>
             </div>
           ))}
-        </div>
+        </div> */}
         <div className='w-full lg:w-[1000px]'>
           <Footer_nav />
         </div>

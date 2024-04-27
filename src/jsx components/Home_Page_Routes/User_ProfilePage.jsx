@@ -1,12 +1,33 @@
+import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { WarningIcon, photoIcon } from "../../assets";
 import ButtonProps from "../Other component/Form"
+import axios from 'axios';
 
 const User_ProfilePage = () => {
   const navigate = useNavigate();
-  const { name } = useParams();
+  const [userProfile, setUserProfile] = useState(null);
   const box_model = ["", "", ""];
+
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        const response = await axios.get('https://trippa-fp9c.onrender.com/api/users/profile', {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+        setUserProfile(response.data.user);
+        console.log('User Profile Response:', response.data.user);
+      } catch (error) {
+        console.error('Error fetching user profile:', error);
+      }
+    };
+
+    fetchUserProfile();
+  }, []);
 
   return (
     <section className='relative flex flex-col justify-center items-center h-full w-full'>
@@ -25,8 +46,12 @@ const User_ProfilePage = () => {
           <div className="flex items-center justify-center w-[124px] h-[124px] rounded-[50%] bg-radioBg">
             <img src={photoIcon} alt="photo icon" />
           </div>
-          <h2>{name}</h2>
-          <p>Traveler</p>
+          {userProfile &&
+            <>
+              <h2>{userProfile.firstname}{userProfile.lastname}</h2>
+              <p>{userProfile.role}</p>
+            </>
+          }
         </div>
         <div className="flex flex-col gap-3 items-center justify-center mt-[10px] px-[30px] h-[310px] lg:h-[350px]">
           <p className="self-start">Recent Trips</p>

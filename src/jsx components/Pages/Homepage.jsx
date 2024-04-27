@@ -56,7 +56,7 @@ const Homepage = ({ activityData, hotelData, guideData, restaurantData }) => {
                     <div className='flex items-center justify-between'>
                         <span className='flex items-center gap-2'>
                             <img src={profileImg} alt="profile image" onClick={handleGetMenu} className='md:w-[50px] lg:w-[60px] cursor-pointer' />
-                            <h4>Hi{name && `, ${name}`}</h4>
+                            <h4>Welcome</h4>
                             <img src={waveEmoji} alt="waving emoji" />
                         </span>
                         <img src={notification_bell} alt="notification bell" className='cursor-pointer' />
@@ -67,7 +67,7 @@ const Homepage = ({ activityData, hotelData, guideData, restaurantData }) => {
                         <img src={filterIcon} alt="filter icon" onClick={handleShowFilter} className='w-[20px] cursor-pointer' />
                     </span>
                 </div>
-                <HomePageNav name={name} />
+                <HomePageNav />
                 <HomePage_model
                     activityData={activityData}
                     hotelData={hotelData}

@@ -29,7 +29,7 @@ const NotificationPage = () => {
                         </span>
                     ))}
                 </div>
-                <div className='flex flex-col justify-center items-center gap-[30px] w-full h-full px-[30px] mt-[160px]'>
+                {/* <div className='flex flex-col justify-center items-center gap-[30px] w-full h-full px-[30px] mt-[160px]'>
                     {notification_box_model.map((item, index) => (
                         <div key={index} onClick={() => { handleViewMessage(index) }} className='flex items-center py-[10px] h-[66px] w-full rounded-[10px] cursor-pointer'>{item}
                             <span className='flex items-center justify-between w-full'>
@@ -46,7 +46,7 @@ const NotificationPage = () => {
                             </span>
                         </div>
                     ))}
-                </div>
+                </div> */}
                 <div className='w-full lg:w-[1000px]'>
                     <Footer_nav />
                 </div>

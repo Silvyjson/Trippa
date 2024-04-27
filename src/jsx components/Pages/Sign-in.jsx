@@ -18,21 +18,18 @@ function SignIn() {
         setLoading(true);
 
         try {
-            const response = await axios.post('https://trippa.onrender.com/api/login', {
-                name: formData.name,
-                email: formData.email,
-                password: formData.password
-            });
+            const response = await axios.post('https://trippa-fp9c.onrender.com/api/login', formData);
             console.log('login successful:', response.data);
-
+            const token = response.data.token;
+            localStorage.setItem('token', token);
             navigate("/home-page");
         } catch (error) {
-            setError(error.response.data);
-            console.error(error.response.data);
+            setError(error.response?.data?.error?.message || 'An unexpected error occurred. Please try again.');
+            console.error('Login error:', error);
         } finally {
             setLoading(false);
         }
-    }
+    };
 
     return (
         <>
