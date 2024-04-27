@@ -9,10 +9,12 @@ const User_ProfilePage = () => {
   const navigate = useNavigate();
   const [userProfile, setUserProfile] = useState(null);
   const [content, setContent] = useState('');
+  const [loading, setLoading] = useState(false);
   const box_model = ["", "", ""];
 
   useEffect(() => {
     const fetchUserProfile = async () => {
+      setLoading(true)
       try {
         const token = localStorage.getItem('token');
         const response = await axios.get('https://trippa-fp9c.onrender.com/api/users/profile', {
@@ -21,10 +23,11 @@ const User_ProfilePage = () => {
           }
         });
         setUserProfile(response.data);
-        console.log('User Profile Response:', response.data);
-        console.log(token)
       } catch (error) {
         console.error('Error fetching user profile:', error);
+        setLoading(false)
+      } finally {
+        setLoading(false)
       }
     };
 
@@ -45,6 +48,14 @@ const User_ProfilePage = () => {
       setContent(savedContent);
     }
   }, []);
+
+  if (loading) {
+    return (
+      <p className="flex items-center justify-center h-[100vh] w-full">
+        <FontAwesomeIcon icon="fa-solid fa-spinner" size="2x" spin />
+      </p>
+    );
+  }
 
   return (
     <section className='relative flex flex-col justify-center items-center h-full w-full'>

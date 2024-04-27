@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { facebookIcon, googleIcon } from "../../assets";
 import ButtonProps, { InputProps, LoginOption } from "../Other component/Form";
 import axios from "axios";
@@ -70,7 +71,9 @@ function SignUp() {
     return (
         <>
             {loading ? (
-                <p className="flex items-center justify-center h-[100vh] w-full">Loading...</p>
+                <p className="flex items-center justify-center h-[100vh] w-full">
+                    <FontAwesomeIcon icon="fa-solid fa-spinner" size="2x" spin/>
+                </p>
             ) : (
                 <>
                     <section className="block mx-auto my-10 w-[90%]">

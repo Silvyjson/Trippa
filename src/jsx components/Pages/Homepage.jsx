@@ -1,14 +1,34 @@
 import PropTypes from 'prop-types';
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { filterIcon, notification_bell, profileImg, searchIcon, waveEmoji } from '../../assets';
 import Footer_nav from '../Navigations/Footer_nav';
 import Filter from '../Home_Page_Routes/Filter';
 import HomePage_model from '../Home_Page_Routes/HomePage_model';
 import HomePageNav from '../Navigations/MenuSlide';
+import axios from 'axios';
 
 const Homepage = ({ activityData, hotelData, guideData, restaurantData }) => {
+    const [userName, setUserName] = useState(null);
     const filterRef = useRef(null);
     const menuRef = useRef(null);
+
+    useEffect(() => {
+        const fetchUserProfile = async () => {
+            try {
+                const token = localStorage.getItem('token');
+                const response = await axios.get('https://trippa-fp9c.onrender.com/api/users/profile', {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+                setUserName(response.data);
+            } catch (error) {
+                console.error('Error fetching user profile:', error);
+            }
+        };
+
+        fetchUserProfile();
+    }, []);
 
     useEffect(() => {
         const handleOutsideClick = (event) => {
@@ -39,6 +59,7 @@ const Homepage = ({ activityData, hotelData, guideData, restaurantData }) => {
         };
     }, []);
 
+    
     const handleShowFilter = () => {
         const Filter = document.querySelector(`.filter`);
         Filter.classList.toggle('toggleFilter');
@@ -56,7 +77,7 @@ const Homepage = ({ activityData, hotelData, guideData, restaurantData }) => {
                     <div className='flex items-center justify-between'>
                         <span className='flex items-center gap-2'>
                             <img src={profileImg} alt="profile image" onClick={handleGetMenu} className='md:w-[50px] lg:w-[60px] cursor-pointer' />
-                            <h4>Welcome</h4>
+                            <h4>Welcome {userName && userName.firstname}</h4>
                             <img src={waveEmoji} alt="waving emoji" />
                         </span>
                         <img src={notification_bell} alt="notification bell" className='cursor-pointer' />

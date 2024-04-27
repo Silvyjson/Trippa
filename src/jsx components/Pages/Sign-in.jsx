@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { facebookIcon, googleIcon } from "../../assets";
 import ButtonProps, { InputProps, LoginOption } from "../Other component/Form";
 import axios from "axios";
@@ -34,7 +35,9 @@ function SignIn() {
     return (
         <>
             {loading ? (
-                <p className="flex items-center justify-center h-[100vh] w-full">loading...</p>
+                <p className="flex items-center justify-center h-[100vh] w-full">
+                    <FontAwesomeIcon icon="fa-solid fa-spinner" size="2x" spin />
+                </p>
             ) : (
                 <section className="block mx-auto my-10 w-[90%]">
                     <div className="flex flex-col gap-10 sm:items-center">
@@ -52,7 +55,7 @@ function SignIn() {
                                 name="email"
                                 value={formData.email}
                                 placeholder="@email.com"
-                                onChange={(e) => setFormData({...formData, email: e.target.value})}
+                                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                             />
                             <InputProps
                                 label="Password"
@@ -62,7 +65,7 @@ function SignIn() {
                                 name="password"
                                 value={formData.password}
                                 placeholder="*********"
-                                onChange={(e) => setFormData({...formData, password: e.target.value})}
+                                onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                             />
                             <span className="flex justify-end w-full max-w-[500px]">
                                 <p className="font-syne text-[18px] text-red-600 cursor-pointer" onClick={() => { navigate("/resetPassword-page") }}>Forgot password</p>
