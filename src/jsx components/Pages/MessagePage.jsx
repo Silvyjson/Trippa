@@ -1,16 +1,16 @@
 import Footer_nav from '../Navigations/Footer_nav';
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import Return_Arrow from '../Navigations/Return_Arrow';
 
 
 const MessagePage = () => {
-    const message_box_model = ["", ""];
-    const navigate = useNavigate();
+    // const message_box_model = ["", ""];
+    // const navigate = useNavigate();
 
-    const handleViewMessage = () => {
-        navigate("/view_message-page");
-    }
+    // const handleViewMessage = () => {
+    //     navigate("/view_message-page");
+    // }
 
     return (
         <section className='relative flex flex-col justify-center items-center h-full w-full'>

@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import PropTypes from 'prop-types';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { bookMark_icon, bookMark_icon2, user_icon } from '../../assets';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from 'axios';
@@ -8,6 +8,7 @@ import axios from 'axios';
 function HomePageNav() {
     const menuRef = useRef();
     const navigate = useNavigate();
+    const location = useLocation();
 
     const HomePageNavItem = ({ title, src, nav }) => {
 
@@ -43,6 +44,10 @@ function HomePageNav() {
         }
     };
 
+    if (location.pathname === '/signIn-page' || location.pathname === '/signUp-page') {
+        handleLogOut();
+    }
+
     return (
         <section className="homePageMenu_section hidden flex-col items-center gap-[40px] fixed right-0 w-[250px] h-full bg-primary z-30 py-[40px] rounded-tl-[20px] sm:w-[300px] lg:right-[280px]" ref={menuRef}>
             <>
@@ -58,12 +63,12 @@ function HomePageNav() {
                     <HomePageNavItem
                         title="Bookings"
                         src={bookMark_icon2}
-                        nav=""
+                        nav="" // Specify where this option should navigate
                     />
                     <HomePageNavItem
                         title="Account"
                         src={user_icon}
-                        nav={"/user_profile-page"}
+                        nav="/user_profile-page"
                     />
                     <div className='flex items-center gap-5 cursor-pointer text-secondary' onClick={handleLogOut}>
                         <FontAwesomeIcon icon="fa-solid fa-right-from-bracket" />

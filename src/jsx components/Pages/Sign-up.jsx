@@ -44,10 +44,24 @@ function SignUp() {
         try {
             const response = await axios.post('https://trippa-fp9c.onrender.com/api/register', formData);
             console.log('Sign up successful:', response.data);
-            setIsSignedIn('Registration Successful please login')
+            setIsSignedIn('Registration Successful please login');
+            setError(null);
+            console.log(formData)
         } catch (error) {
-            setError(error.response?.data?.error?.message || 'An unexpected error occurred. Please try again.');
+            if (error.response) {
+                if (error.response.status === 400) {
+                    setError(error.response?.data?.error?.message || 'User already exists. Please use a different email.');
+                } else {
+                    setError('An unexpected error occurred. Please try again.');
+                }
+            } else if (error.request) {
+                setError('Network error. Please check your internet connection and try again.');
+            } else {
+                setError('An unexpected error occurred. Please try again.');
+            }
             console.error('Sign up error:', error);
+            setLoading(false);
+            setIsSignedIn(null);
         } finally {
             setLoading(false);
         }

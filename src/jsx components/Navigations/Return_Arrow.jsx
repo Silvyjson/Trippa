@@ -25,7 +25,7 @@ const Return_Arrow = () => {
   }
 
   return (
-    <div className="flex gap-[30%] items-center p-[20px] bg-page_color fixed top-0 h-[80px] w-full text-[18px] lg:w-[1000px]">
+    <div className="flex gap-[40%] items-center p-[20px] bg-page_color fixed top-0 h-[80px] w-full text-[18px] lg:w-[1000px]">
       <FontAwesomeIcon
         icon="fa-solid fa-arrow-left"
         onClick={() => {

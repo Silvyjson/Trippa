@@ -8,6 +8,7 @@ import axios from 'axios';
 const User_ProfilePage = () => {
   const navigate = useNavigate();
   const [userProfile, setUserProfile] = useState(null);
+  const [content, setContent] = useState('');
   const box_model = ["", "", ""];
 
   useEffect(() => {
@@ -19,14 +20,30 @@ const User_ProfilePage = () => {
             Authorization: `Bearer ${token}`
           }
         });
-        setUserProfile(response.data.user);
-        console.log('User Profile Response:', response.data.user);
+        setUserProfile(response.data);
+        console.log('User Profile Response:', response.data);
+        console.log(token)
       } catch (error) {
         console.error('Error fetching user profile:', error);
       }
     };
 
     fetchUserProfile();
+  }, []);
+
+  const handleChange = (event) => {
+    const newValue = event.target.value;
+    setContent(newValue);
+    // Store the content in local storage
+    localStorage.setItem('textareaContent', newValue);
+  };
+
+  // Load the content from local storage when the component mounts
+  useEffect(() => {
+    const savedContent = localStorage.getItem('textareaContent');
+    if (savedContent) {
+      setContent(savedContent);
+    }
   }, []);
 
   return (
@@ -42,15 +59,15 @@ const User_ProfilePage = () => {
           />
           <img src={WarningIcon} alt="warning icon" width={20} />
         </div>
-        <div className="flex flex-col gap-3 items-center justify-center mt-[90px] h-[280px] cursor-pointer">
+        <div className="flex flex-col gap-3 items-center justify-center mt-[90px] h-[200px] cursor-pointer">
           <div className="flex items-center justify-center w-[124px] h-[124px] rounded-[50%] bg-radioBg">
             <img src={photoIcon} alt="photo icon" />
           </div>
           {userProfile &&
-            <>
-              <h2>{userProfile.firstname}{userProfile.lastname}</h2>
-              <p>{userProfile.role}</p>
-            </>
+            <div className="flex flex-col items-center">
+              <h2>{userProfile.firstname} {userProfile.lastname}</h2>
+              <p className="text-gray-500">{userProfile.email}</p>
+            </div>
           }
         </div>
         <div className="flex flex-col gap-3 items-center justify-center mt-[10px] px-[30px] h-[310px] lg:h-[350px]">
@@ -75,12 +92,16 @@ const User_ProfilePage = () => {
         </div>
         <div className="mt-[20px] px-[30px]">
           <h1>Bio<FontAwesomeIcon icon="fa-solid fa-pencil " className="ml-2" /></h1>
-          <textarea name="" id="" cols="30" rows="10" className="w-full text_area"></textarea>
+          <textarea name="" id="" cols="30" rows="6" className="w-full text_area p-[10px]" value={content}
+            onChange={handleChange}
+            placeholder="Type something here..." />
         </div>
-        <ButtonProps
-          label="Edit Profile"
-          className="w-full bg-primary m-[30px] block mx-auto"
-        />
+        <div className="m-[30px]">
+          <ButtonProps
+            label="Edit Profile"
+            className="w-full bg-primary max-w-full"
+          />
+        </div>
       </div>
     </section>
   );

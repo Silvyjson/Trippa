@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate, useParams } from "react-router-dom";
-import { WarningIcon, photoIcon } from "../../../assets";
+import { WarningIcon } from "../../../assets";
 import ButtonProps from "../../Other component/Form"
 
 const GuideDetails = ({ guideData }) => {
@@ -27,9 +27,9 @@ const GuideDetails = ({ guideData }) => {
           />
           <img src={WarningIcon} alt="warning icon" width={20} />
         </div>
-        <div className="flex flex-col gap-3 items-center justify-center mt-[90px] h-[280px]">
+        <div className="flex flex-col gap-3 items-center justify-center mt-[90px] h-[200px]">
           <div className="flex items-center justify-center w-[124px] h-[124px] rounded-[50%] bg-radioBg">
-            <img src={photoIcon} alt="photo icon" />
+            <img src={guide["PROFILE PIC "]} alt="photo icon" className='h-full w-full rounded-[50%]'/>
           </div>
           <span className="flex flex-col items-center justify-center">
             <h2>{guide.NAME}</h2>

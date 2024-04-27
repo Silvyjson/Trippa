@@ -3,7 +3,7 @@ import Footer_nav from '../Navigations/Footer_nav';
 // import { useNavigate } from 'react-router-dom';
 
 const FavouritePage = () => {
-  const box_model = ["", "", "", "", "", "",];
+  // const box_model = ["", "", "", "", "", "",];
 
   // const navigate = useNavigate();
 

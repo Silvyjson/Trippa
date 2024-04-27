@@ -1,22 +1,22 @@
 import { useState } from 'react'
 import Footer_nav from '../Navigations/Footer_nav';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import Return_Arrow from '../Navigations/Return_Arrow';
 
 
 const NotificationPage = () => {
-    const notification_box_model = ["", ""];
-    const notification = ["All", "Unread(2)"]
+    // const notification_box_model = ["", ""];
+    const notification = ["All", "Unread(0)"]
     const [selected, setSelected] = useState(0)
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     const handleSelectNotificationOption = (index) => {
         setSelected(index)
     }
 
-    const handleViewMessage = () => {
-        navigate('/view_message-page');
-    }
+    // const handleViewMessage = () => {
+    //     navigate('/view_message-page');
+    // }
 
     return (
         <section className='relative flex flex-col justify-center items-center h-full w-full'>
