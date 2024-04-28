@@ -1,14 +1,14 @@
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate, useParams } from "react-router-dom";
-import { WarningIcon } from "../../../assets";
-import ButtonProps from "../../Other component/Form"
+import { WarningIcon, rate_profile } from "../../../assets";
+import ButtonProps from "../../Other component/Form";
 
-const GuideDetails = ({ guideData }) => {
+const GuideDetails = ({ guideData, activityData }) => {
   const navigate = useNavigate();
   const { index } = useParams();
   const guide = guideData && guideData[index];
-  const box_model = ["", "", ""];
+  const activity = activityData.filter(activity => activity['TOUR GUIDE'] === guide['TOUR GUIDE']);
 
   if (!guide) {
     return <div>Guide not found</div>;
@@ -29,7 +29,7 @@ const GuideDetails = ({ guideData }) => {
         </div>
         <div className="flex flex-col gap-3 items-center justify-center mt-[90px] h-[200px]">
           <div className="flex items-center justify-center w-[124px] h-[124px] rounded-[50%] bg-radioBg">
-            <img src={guide["PROFILE PIC "]} alt="photo icon" className='h-full w-full rounded-[50%]'/>
+            <img src={guide["PROFILE PIC "]} alt="photo icon" className='h-full w-full rounded-[50%]' />
           </div>
           <span className="flex flex-col items-center justify-center">
             <h2>{guide.NAME}</h2>
@@ -49,20 +49,26 @@ const GuideDetails = ({ guideData }) => {
             </span>
           </span>
         </div>
-        <div className="flex flex-col gap-3 items-center justify-center px-[30px] my-[10px] h-[310px] lg:h-[350px]">
+        <div className="flex flex-col gap-3 items-center justify-center px-[30px] my-[10px] h-full">
           <h1 className="self-start text-[18px] mb-[20px]">Trips the can guide you at</h1>
-          <div className="h-[280px] w-full overflow-x-auto overflow-y-hidden lg:h-[300px]" >
+          <div className="h-full w-full overflow-x-auto overflow-y-hidden" >
             <div className='flex items-center gap-[15px] w-full h-full'>
-              {box_model.map((item, index) => (
-                <div key={index} className='flex flex-1 flex-col gap-3 rounded-[10px] py-[18px] px-[24px] bg-secondary box_size_1'>{item}
-                  <div className=' box_size_2 bg-highlight_purple rounded-[10px]' />
+              {activity.map((activity, index) => (
+                <div key={index} className='flex flex-1 flex-col gap-3 rounded-[10px] py-[18px] px-[24px] bg-secondary box_size_1 min-w-[300px]'>
+                  <img src={activity["PICTURES 1"]} className=' box_size_2 bg-highlight_purple rounded-[10px]' />
+                  <FontAwesomeIcon icon="fa-regular fa-heart" className="absolute top-[30px] right-[40px]  text-primary text-[20px] cursor-pointer" />
                   <div className='flex flex-col gap-3 w-full'>
-                    <div className='flex justify-between'>
-                      <span className='w-[150px] h-[15px] bg-highlight_purple' />
-                      <span className='w-[30px] h-[15px] bg-highlight_purple' />
+                    <div className='flex justify-between items-center'>
+                      <div className='flex flex-col justify-center items-start'>
+                        <span className='font-bold text-[14.5px]'>{activity.NAMES}</span>
+                        <span className=''><FontAwesomeIcon icon="fa-solid fa-location-dot" className='mr-2' />{activity.LOCATION}</span>
+                      </div>
+                      <span className='self-start flex justify-end items-center w-[30%]'>{activity.RATE}<FontAwesomeIcon icon="fa-regular fa-star" className='text-[12px] cursor-pointer' /></span>
                     </div>
-                    <span className='w-[150px] h-[15px] bg-highlight_purple' />
-                    <span className='w-[150px] h-[15px] bg-highlight_purple' />
+                    <div className="flex gap-2">
+                      <img src={rate_profile} className='w-[60px] h-[25px]' />
+                      <span className='text-[14px]'>{activity["NUMBER OF RATING"]}25+ People enjoyed</span>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -80,12 +86,13 @@ const GuideDetails = ({ guideData }) => {
           />
         </div>
       </div>
-    </section>
+    </section >
   );
 };
 
 GuideDetails.propTypes = {
   guideData: PropTypes.array.isRequired,
+  activityData: PropTypes.array.isRequired,
 };
 
 export default GuideDetails;

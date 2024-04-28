@@ -42,9 +42,9 @@ const HotelDetails = ({ hotelData }) => {
                             ))}
                         </span>
                     </div>
-                    <span className="flex flex-col items-center justify-center mt-10">
+                    <span className="flex flex-col self-center items-center justify-center mt-10 w-[80%]">
                         <h2>{hotel.NAME}</h2>
-                        <p className="text-[13px] text-gray-500"><FontAwesomeIcon icon="fa-solid fa-location-dot" className='mr-2' />{hotel.ADDRESS}</p>
+                        <p className="text-[13px] text-gray-500 text-center"><FontAwesomeIcon icon="fa-solid fa-location-dot" className='mr-2' />{hotel.ADDRESS}</p>
                     </span>
                     <div className="flex justify-between py-[20px] m-[30px] bottom_border">
                         <p>Star Ratings</p>
@@ -59,11 +59,11 @@ const HotelDetails = ({ hotelData }) => {
                             </span>
                         </span>
                     </div>
-                    <div className=" w-full flex flex-col gap-4 px-[30px] mt-10" >
+                    <div className=" w-full flex flex-col gap-4 px-[30px]" >
                         <h1 className="self-start text-[18px]">Room Photos</h1>
-                        <div className='flex items-center gap-[15px] h-[300px] w-full'>
-                            <img src={hotel["PICTURES 1"]} alt="" className='h-full w-full max-w-[300px] rounded-[20px]' />
-                            <img src={hotel["PICTURE 2"]} alt="" className='h-full w-full max-w-[300px] rounded-[20px]' />
+                        <div className='flex flex-wrap items-center gap-[15px] w-full'>
+                            <img src={hotel["PICTURES 1"]} alt="" className='rounded-[20px] box_size_4 min-h-[150px] min-w-[150px]' />
+                            <img src={hotel["PICTURE 2"]} alt="" className='rounded-[20px] box_size_4 min-h-[150px] min-w-[150px]' />
                         </div>
                     </div>
                     <div className='flex flex-col gap-4 px-[30px] mt-10'>
@@ -77,7 +77,7 @@ const HotelDetails = ({ hotelData }) => {
                     <div className="flex flex-col gap-3 px-[30px] mt-10">
                         <h1 className="self-start text-[18px]">View in maps</h1>
                         <a href={hotel["GOOGLE MAP LINK"]} target="_blank" rel="noopener noreferrer">
-                            <img src={map} alt="" className='rounded-[20px] cursor-pointer'/>
+                            <img src={map} alt="" className='rounded-[20px] cursor-pointer min-h-[180px]'/>
                         </a>
                     </div>
                     <div className=" flex gap-5 my-[50px] mx-[30px]">

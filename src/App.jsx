@@ -11,8 +11,8 @@ import NotificationPage from "./jsx components/Pages/NotificationPage";
 import FavouritePage from "./jsx components/Pages/FavouritePage";
 import User_ProfilePage from "./jsx components/Home_Page_Routes/User_ProfilePage";
 import Saved_TripsPage from "./jsx components/Home_Page_Routes/Saved_TripsPage";
-import ActivityDetails from "./jsx components/Home_Page_Routes/Preview More Data/ActivitiesDetails";
-import activityData from "./jsx components/Excel Data/ActivitiesData";
+import ActivityDetails from "./jsx components/Home_Page_Routes/Preview More Data/ActivityDetails";
+import activityData from "./jsx components/Excel Data/ActivityData";
 import HotelDetails from "./jsx components/Home_Page_Routes/Preview More Data/HotelDetails";
 import hotelData from "./jsx components/Excel Data/HotelData";
 import GuideDetails from "./jsx components/Home_Page_Routes/Preview More Data/GuideDetails";
@@ -38,7 +38,7 @@ function App() {
     { path: "/saved_trips-page", element: <Saved_TripsPage /> },
     { path: "/activity/:index", element: <ActivityDetails activityData={activityData} /> },
     { path: "/hotel/:index", element: <HotelDetails hotelData={hotelData} /> },
-    { path: "/guide/:index", element: <GuideDetails guideData={guideData} /> },
+    { path: "/guide/:index", element: <GuideDetails guideData={guideData} activityData={activityData} /> },
     { path: "/restaurant/:index", element: <RestaurantDetails restaurantData={restaurantData} /> },
   ]);
 

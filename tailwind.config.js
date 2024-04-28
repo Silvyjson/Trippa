@@ -12,7 +12,7 @@ export default {
         inputBorder: "#E0E0E0",
         textColor: "#404040",
         gray_color: "#C6C6C6",
-        disable: "#F8F8F8",
+        disable: "#c2c2c2",
         search_input_color: "#F9FAFB",
       },
       fontFamily: {

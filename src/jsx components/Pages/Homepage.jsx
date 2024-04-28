@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { useRef, useEffect, useState } from 'react';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { filterIcon, notification_bell, profileImg, searchIcon, waveEmoji } from '../../assets';
 import Footer_nav from '../Navigations/Footer_nav';
 import Filter from '../Home_Page_Routes/Filter';
@@ -9,11 +10,13 @@ import axios from 'axios';
 
 const Homepage = ({ activityData, hotelData, guideData, restaurantData }) => {
     const [userName, setUserName] = useState(null);
+    const [loading, setLoading] = useState(false);
     const filterRef = useRef(null);
     const menuRef = useRef(null);
 
     useEffect(() => {
         const fetchUserProfile = async () => {
+            setLoading(true);
             try {
                 const token = localStorage.getItem('token');
                 const response = await axios.get('https://trippa-fp9c.onrender.com/api/users/profile', {
@@ -24,6 +27,9 @@ const Homepage = ({ activityData, hotelData, guideData, restaurantData }) => {
                 setUserName(response.data);
             } catch (error) {
                 console.error('Error fetching user profile:', error);
+                setLoading(false);
+            } finally {
+                setLoading(false);
             }
         };
 
@@ -59,7 +65,7 @@ const Homepage = ({ activityData, hotelData, guideData, restaurantData }) => {
         };
     }, []);
 
-    
+
     const handleShowFilter = () => {
         const Filter = document.querySelector(`.filter`);
         Filter.classList.toggle('toggleFilter');
@@ -69,6 +75,14 @@ const Homepage = ({ activityData, hotelData, guideData, restaurantData }) => {
         const Menu = document.querySelector(`.homePageMenu_section`);
         Menu.classList.toggle('getMenu');
     };
+
+    if (loading) {
+        return (
+          <p className="flex items-center justify-center h-[100vh] w-full">
+            <FontAwesomeIcon icon="fa-solid fa-spinner" size="2x" spin />
+          </p>
+        );
+      }
 
     return (
         <section className='relative flex flex-col justify-center items-center h-full w-full'>

@@ -42,12 +42,12 @@ const ActivityDetails = ({ activityData }) => {
               ))}
             </span>
           </div>
-          <span className="flex items-center justify-between h-[100px] px-[30px]">
+          <span className="flex items-center justify-between mx-[30px] my-[20px]">
             <span className='flex flex-col'>
               <h2>{activity.NAMES}</h2>
-              <p className='self-start'><FontAwesomeIcon icon="fa-solid fa-location-dot" className='mr-2' />{activity.ADDRESS}</p>
+              <p className=''><FontAwesomeIcon icon="fa-solid fa-location-dot" className='mr-2' />{activity.ADDRESS}</p>
             </span>
-            <p>{activity.RATE}4.0<FontAwesomeIcon icon="fa-solid fa-star" className='text-yellow-500' /></p>
+            <p className='flex justify-end items-center self-start w-[30%]'>{activity.RATE}<FontAwesomeIcon icon="fa-solid fa-star" className='text-yellow-500' /></p>
           </span>
           <div className="flex flex-col gap-4 px-[30px]">
             <h1 className="self-start text-[18px]">About</h1>
@@ -56,16 +56,16 @@ const ActivityDetails = ({ activityData }) => {
               <p>{activity["PRICE RANGE"]}</p>
             </div>
             <div className=" w-full" >
-              <div className='flex items-center gap-[15px] h-[300px] w-full'>
-                <img src={activity["PICTURES 1"]} alt="" className='h-full w-full max-w-[300px] rounded-[20px]' />
-                <img src={activity["PICTURES 2"]} alt="" className='h-full w-full max-w-[300px] rounded-[20px]' />
+              <div className='flex flex-wrap items-center gap-[15px] w-full'>
+                <img src={activity["PICTURES 1"]} alt="" className='rounded-[20px] box_size_4 min-h-[150px] min-w-[150px]' />
+                <img src={activity["PICTURES 2"]} alt="" className='rounded-[20px] box_size_4 min-h-[150px] min-w-[150px]' />
               </div>
             </div>
           </div>
           <div className="flex flex-col gap-3 px-[30px] mt-10">
             <h1 className="self-start text-[18px]">View in maps</h1>
             <a href={activity["GOOGLE MAP LINK"]} target="_blank" rel="noopener noreferrer">
-              <img src={map} alt="" className=' rounded-[20px] cursor-pointer' />
+              <img src={map} alt="" className=' rounded-[20px] cursor-pointer min-h-[180px]' />
             </a>
           </div>
           <div className=" flex gap-5 my-[50px] mx-[30px]">

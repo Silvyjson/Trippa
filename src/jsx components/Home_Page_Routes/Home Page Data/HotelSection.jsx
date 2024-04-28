@@ -15,13 +15,15 @@ const HotelSection = ({ hotelData }) => {
             {hotelData && hotelData.map((hotel, index) => (
                 <div key={index} className='relative flex flex-col gap-3 justify-center items-center rounded-[10px] py-[18px] px-[24px] bg-secondary box_size_1'>
                     <img src={hotel["PICTURES 1"]} alt={hotel.alt} className=' box_size_2 rounded-[10px] ' />
-                    <FontAwesomeIcon icon="fa-regular fa-heart" className="absolute top-10 right-16 text-primary text-[20px] cursor-pointer" />
+                    <FontAwesomeIcon icon="fa-regular fa-heart" className="absolute top-[30px] right-[40px] text-primary text-[20px] cursor-pointer" />
                     <div className='flex flex-col gap-3 w-full'>
                         <div className='flex justify-between items-center'>
-                            <span className='font-bold'>{hotel.NAME}</span>
-                            <span className=''>{hotel.RATE}<FontAwesomeIcon icon="fa-regular fa-star" className='text-[12px] cursor-pointer' /></span>
+                            <div className='flex flex-col justify-center items-start'>
+                                <span className='font-bold'>{hotel.NAME}</span>
+                                <span className=''><FontAwesomeIcon icon="fa-solid fa-location-dot" className='mr-2' />{hotel.ADDRESS}</span>
+                            </div>
+                            <span className='self-start flex justify-end items-center w-[30%]'>{hotel.RATE}<FontAwesomeIcon icon="fa-regular fa-star" className='text-[12px] cursor-pointer' /></span>
                         </div>
-                        <span className=''>{hotel.ADDRESS}</span>
                         <div className='flex justify-between items-center'>
                             <div className="flex gap-2">
                                 <img src={rate_profile} className='w-[60px] h-[25px]' />

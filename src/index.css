@@ -59,6 +59,18 @@ body {
     aspect-ratio: 10/5;
 }
 
+.box_size_4 {
+    width: 30%;
+    aspect-ratio: 10/10;
+}
+
+@media screen and (max-width: 370px) {
+    .box_size_4 {
+        width: 100%;
+        aspect-ratio: 10/5;
+    } 
+}
+
 .bottom_border {
     border-bottom: 2px solid #0000004D;
 }

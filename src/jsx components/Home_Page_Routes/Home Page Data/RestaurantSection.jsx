@@ -14,15 +14,15 @@ const RestaurantSection = ({restaurantData}) => {
             {restaurantData && restaurantData.map((restaurant, index) => (
                 <div key={index} className='relative flex flex-col gap-3 justify-center items-center rounded-[10px] py-[18px] px-[24px] bg-secondary box_size_1'>
                     <img src={restaurant.PICTURES} alt={restaurant.alt} className='box_size_2 rounded-[10px] ' />
-                    <FontAwesomeIcon icon="fa-regular fa-heart" className="absolute top-10 right-16 text-primary text-[20px] cursor-pointer" />
+                    <FontAwesomeIcon icon="fa-regular fa-heart" className="absolute top-[30px] right-[40px]  text-primary text-[20px] cursor-pointer" />
                     <div className='flex flex-col gap-3 w-full'>
                         <div className='flex justify-between items-center'>
                             <div className="flex flex-col">
                                 <span className='font-bold'>{restaurant.NAME}</span>
-                                <span className=''>{restaurant.ADDRESS}</span>
+                                <span className=''><FontAwesomeIcon icon="fa-solid fa-location-dot" className='mr-2' />{restaurant.ADDRESS}</span>
                                 <span className='text-primary'>{restaurant["RESTARANT TYPE"]} <i className="text-[14px] text-red-500">({restaurant["DISH TYPE"]})</i></span>
                             </div>
-                            <span className='self-start'>{restaurant.RATE}<FontAwesomeIcon icon="fa-regular fa-star" className='text-[12px] cursor-pointer' /></span>
+                            <span className='self-start flex justify-end items-center w-[30%]'>{restaurant.RATE}<FontAwesomeIcon icon="fa-regular fa-star" className='text-[12px] cursor-pointer' /></span>
                         </div>
                         <div className='flex justify-between items-center'>
                             <div className="flex gap-2">
