@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
-import { WarningIcon, photoIcon } from "../../assets";
+import { WarningIcon, photoIcon, rate_profile } from "../../assets";
 import ButtonProps from "../Other component/Form"
 import axios from 'axios';
 
@@ -10,7 +10,7 @@ const User_ProfilePage = () => {
   const [userProfile, setUserProfile] = useState(null);
   const [content, setContent] = useState('');
   const [loading, setLoading] = useState(false);
-  const box_model = ["", "", ""];
+  const recentClickedActivities = JSON.parse(localStorage.getItem('recentClickedActivities')) || [];
 
   useEffect(() => {
     const fetchUserProfile = async () => {
@@ -37,11 +37,9 @@ const User_ProfilePage = () => {
   const handleChange = (event) => {
     const newValue = event.target.value;
     setContent(newValue);
-    // Store the content in local storage
     localStorage.setItem('textareaContent', newValue);
   };
 
-  // Load the content from local storage when the component mounts
   useEffect(() => {
     const savedContent = localStorage.getItem('textareaContent');
     if (savedContent) {
@@ -81,23 +79,31 @@ const User_ProfilePage = () => {
             </div>
           }
         </div>
-        <div className="flex flex-col gap-3 items-center justify-center mt-[10px] px-[30px] h-[310px] lg:h-[350px]">
-          <p className="self-start">Recent Trips</p>
-          <div className="h-[280px] w-full overflow-x-auto overflow-y-hidden lg:h-[300px]" >
+        <div className="flex flex-col gap-3 items-center justify-center px-[30px] my-[30px] h-full">
+          <h1 className="self-start text-[18px]">Recent Viewed Trips</h1>
+          <div className="h-full w-full overflow-x-auto overflow-y-hidden" >
             <div className='flex items-center gap-[15px] w-full h-full'>
-              {box_model.map((item, index) => (
-                <div key={index} className='flex flex-1 flex-col gap-3 rounded-[10px] py-[18px] px-[24px] bg-secondary box_size_1'>{item}
-                  <div className=' box_size_2 bg-highlight_purple rounded-[10px]' />
-                  <div className='flex flex-col gap-3 w-full'>
-                    <div className='flex justify-between'>
-                      <span className='w-[150px] h-[15px] bg-highlight_purple' />
-                      <span className='w-[30px] h-[15px] bg-highlight_purple' />
+              {recentClickedActivities ? (
+                recentClickedActivities.map((activity, index) => (
+                  <div key={index} className='relative flex flex-1 flex-col gap-3 rounded-[10px] py-[18px] px-[24px] bg-secondary box_size_1 min-w-[300px]'>
+                    <img src={activity["PICTURES 1"]} className=' box_size_2 bg-highlight_purple rounded-[10px]' />
+                    <FontAwesomeIcon icon="fa-regular fa-heart" className="absolute top-[30px] right-[40px]  text-primary text-[20px] cursor-pointer" />
+                    <div className='flex flex-col gap-3 w-full'>
+                      <div className='flex justify-between items-center'>
+                        <div className='flex flex-col justify-center items-start'>
+                          <span className='font-bold text-[14.5px]'>{activity.NAMES}</span>
+                          <span className=''><FontAwesomeIcon icon="fa-solid fa-location-dot" className='mr-2' />{activity.LOCATION}</span>
+                        </div>
+                        <span className='self-start flex justify-end items-center w-[30%]'>{activity.RATE}<FontAwesomeIcon icon="fa-regular fa-star" className='text-[12px] cursor-pointer' /></span>
+                      </div>
+                      <div className="flex gap-2">
+                        <img src={rate_profile} className='w-[60px] h-[25px]' />
+                        <span className='text-[14px]'>{activity["NUMBER OF RATING"]}25+ People enjoyed</span>
+                      </div>
                     </div>
-                    <span className='w-[150px] h-[15px] bg-highlight_purple' />
-                    <span className='w-[150px] h-[15px] bg-highlight_purple' />
                   </div>
-                </div>
-              ))}
+                ))
+              ) : (<span className="text-[14px]">No Trips Viewed yet</span>)}
             </div>
           </div>
         </div>

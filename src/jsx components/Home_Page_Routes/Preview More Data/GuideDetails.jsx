@@ -50,11 +50,11 @@ const GuideDetails = ({ guideData, activityData }) => {
           </span>
         </div>
         <div className="flex flex-col gap-3 items-center justify-center px-[30px] my-[10px] h-full">
-          <h1 className="self-start text-[18px] mb-[20px]">Trips the can guide you at</h1>
+          <h1 className="self-start text-[18px]">Trips the can guide you at</h1>
           <div className="h-full w-full overflow-x-auto overflow-y-hidden" >
             <div className='flex items-center gap-[15px] w-full h-full'>
               {activity.map((activity, index) => (
-                <div key={index} className='flex flex-1 flex-col gap-3 rounded-[10px] py-[18px] px-[24px] bg-secondary box_size_1 min-w-[300px]'>
+                <div key={index} className='relative flex flex-1 flex-col gap-3 rounded-[10px] py-[18px] px-[24px] bg-secondary box_size_1 min-w-[300px]'>
                   <img src={activity["PICTURES 1"]} className=' box_size_2 bg-highlight_purple rounded-[10px]' />
                   <FontAwesomeIcon icon="fa-regular fa-heart" className="absolute top-[30px] right-[40px]  text-primary text-[20px] cursor-pointer" />
                   <div className='flex flex-col gap-3 w-full'>
