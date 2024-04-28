@@ -9,7 +9,7 @@ const RestaurantDetails = ({ restaurantData }) => {
   const navigate = useNavigate();
   const { index } = useParams();
   const restaurant = restaurantData && restaurantData[index];
-  const images = [restaurant["PICTURES"], restaurant["PICTURE 2"]]
+  const images = [restaurant["PICTURE 1"], restaurant["PICTURE 2"]]
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const handleLabelClick = (index) => {
@@ -70,7 +70,7 @@ const RestaurantDetails = ({ restaurantData }) => {
           <div className=" w-full flex flex-col gap-4 px-[30px] mt-10" >
             <h1 className="self-start text-[18px]">Photos</h1>
             <div className='flex flex-wrap items-center gap-[15px] w-[100%]'>
-              <img src={restaurant["PICTURES"]} alt="" className=' rounded-[20px] box_size_4 min-h-[150px] min-w-[150px]' />
+              <img src={restaurant["PICTURE 1"]} alt="" className=' rounded-[20px] box_size_4 min-h-[150px] min-w-[150px]' />
               <img src={restaurant["PICTURE 2"]} alt="" className=' rounded-[20px] box_size_4 min-h-[150px] min-w-[150px]' />
             </div>
           </div>

@@ -31,15 +31,13 @@ export const LogOutPopup = ({ cancelOnClick, logoutOnclick }) => {
 
 
     return (
-        <section className="flex items-center justify-center absolute w-full h-[120%] top-0 lg:w-[1000px]">
-            <div className="flex flex-col gap-3 justify-beyween w-full items-center bg-primary max-w-[400px] cursor-pointer h-[300px] rounded-[20px] text-secondary">
-                <p>Do you want to logout</p>
-                <div className="flex gap-3 justify-center items-center w-full">
-                    <ButtonProps label="Cancel" onClick={cancelOnClick} />
-                    <ButtonProps label="Logout" onClick={logoutOnclick}/>
-                </div>
+        <div className="flex flex-col gap-10 justify-center w-full items-center bg-secondary max-w-[300px] sm:max-w-[400px] cursor-pointer h-[200px] rounded-[20px] p-5">
+            <h1 className="font-extrabold text-[20px]">Do you want to logout ?</h1>
+            <div className="flex gap-3 justify-center items-center w-full">
+                <ButtonProps label="Cancel" onClick={cancelOnClick} className="bg-primary" />
+                <ButtonProps label="Logout" onClick={logoutOnclick} className="bg-primary" />
             </div>
-        </section>
+        </div>
     )
 }
 

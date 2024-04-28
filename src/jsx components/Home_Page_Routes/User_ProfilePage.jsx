@@ -8,9 +8,8 @@ import axios from 'axios';
 const User_ProfilePage = () => {
   const navigate = useNavigate();
   const [userProfile, setUserProfile] = useState(null);
-  const [content, setContent] = useState('');
   const [loading, setLoading] = useState(false);
-  const recentClickedActivities = JSON.parse(localStorage.getItem('recentClickedActivities')) || [];
+  const recentViewed = JSON.parse(localStorage.getItem('recentViewed')) || [];
 
   useEffect(() => {
     const fetchUserProfile = async () => {
@@ -32,19 +31,6 @@ const User_ProfilePage = () => {
     };
 
     fetchUserProfile();
-  }, []);
-
-  const handleChange = (event) => {
-    const newValue = event.target.value;
-    setContent(newValue);
-    localStorage.setItem('textareaContent', newValue);
-  };
-
-  useEffect(() => {
-    const savedContent = localStorage.getItem('textareaContent');
-    if (savedContent) {
-      setContent(savedContent);
-    }
   }, []);
 
   if (loading) {
@@ -80,25 +66,24 @@ const User_ProfilePage = () => {
           }
         </div>
         <div className="flex flex-col gap-3 items-center justify-center px-[30px] my-[30px] h-full">
-          <h1 className="self-start text-[18px]">Recent Viewed Trips</h1>
+          <h1 className="self-start text-[18px]">Recent Trips</h1>
           <div className="h-full w-full overflow-x-auto overflow-y-hidden" >
             <div className='flex items-center gap-[15px] w-full h-full'>
-              {recentClickedActivities ? (
-                recentClickedActivities.map((activity, index) => (
+              {recentViewed ? (
+                recentViewed.map((viewed, index) => (
                   <div key={index} className='relative flex flex-1 flex-col gap-3 rounded-[10px] py-[18px] px-[24px] bg-secondary box_size_1 min-w-[300px]'>
-                    <img src={activity["PICTURES 1"]} className=' box_size_2 bg-highlight_purple rounded-[10px]' />
-                    <FontAwesomeIcon icon="fa-regular fa-heart" className="absolute top-[30px] right-[40px]  text-primary text-[20px] cursor-pointer" />
+                    <img src={viewed["PICTURE 1"]} className=' box_size_2 bg-highlight_purple rounded-[10px]' />
                     <div className='flex flex-col gap-3 w-full'>
                       <div className='flex justify-between items-center'>
                         <div className='flex flex-col justify-center items-start'>
-                          <span className='font-bold text-[14.5px]'>{activity.NAMES}</span>
-                          <span className=''><FontAwesomeIcon icon="fa-solid fa-location-dot" className='mr-2' />{activity.LOCATION}</span>
+                          <span className='font-bold text-[14.5px]'>{viewed.NAME}</span>
+                          <span className='text-[10px]'><FontAwesomeIcon icon="fa-solid fa-location-dot" className='mr-2' />{viewed.ADDRESS}</span>
                         </div>
-                        <span className='self-start flex justify-end items-center w-[30%]'>{activity.RATE}<FontAwesomeIcon icon="fa-regular fa-star" className='text-[12px] cursor-pointer' /></span>
+                        <span className='self-start flex justify-end items-center w-[30%]'>{viewed.RATE}<FontAwesomeIcon icon="fa-regular fa-star" className='text-[12px] cursor-pointer' /></span>
                       </div>
                       <div className="flex gap-2">
                         <img src={rate_profile} className='w-[60px] h-[25px]' />
-                        <span className='text-[14px]'>{activity["NUMBER OF RATING"]}25+ People enjoyed</span>
+                        <span className='text-[14px]'>25+ People enjoyed</span>
                       </div>
                     </div>
                   </div>
@@ -109,9 +94,7 @@ const User_ProfilePage = () => {
         </div>
         <div className="mt-[20px] px-[30px]">
           <h1>Bio<FontAwesomeIcon icon="fa-solid fa-pencil " className="ml-2" /></h1>
-          <textarea name="" id="" cols="30" rows="6" className="w-full text_area p-[10px]" value={content}
-            onChange={handleChange}
-            placeholder="Type something here..." />
+          <textarea name="" id="" cols="30" rows="6" className="w-full text_area p-[10px]" disabled/>
         </div>
         <div className="m-[30px]">
           <ButtonProps

@@ -10,7 +10,6 @@ import ViewMessage from "./jsx components/Message_page_Routes/ViewMessage";
 import NotificationPage from "./jsx components/Pages/NotificationPage";
 import FavouritePage from "./jsx components/Pages/FavouritePage";
 import User_ProfilePage from "./jsx components/Home_Page_Routes/User_ProfilePage";
-import Saved_TripsPage from "./jsx components/Home_Page_Routes/Saved_TripsPage";
 import ActivityDetails from "./jsx components/Home_Page_Routes/Preview More Data/ActivityDetails";
 import activityData from "./jsx components/Excel Data/ActivityData";
 import HotelDetails from "./jsx components/Home_Page_Routes/Preview More Data/HotelDetails";
@@ -35,7 +34,6 @@ function App() {
     { path: "/notification-page", element: <NotificationPage /> },
     { path: "/favourite-page", element: <FavouritePage /> },
     { path: "/user_profile-page", element: <User_ProfilePage /> },
-    { path: "/saved_trips-page", element: <Saved_TripsPage /> },
     { path: "/activity/:index", element: <ActivityDetails activityData={activityData} /> },
     { path: "/hotel/:index", element: <HotelDetails hotelData={hotelData} /> },
     { path: "/guide/:index", element: <GuideDetails guideData={guideData} activityData={activityData} /> },

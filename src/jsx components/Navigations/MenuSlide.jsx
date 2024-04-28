@@ -1,14 +1,17 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { bookMark_icon, bookMark_icon2, user_icon } from '../../assets';
+import { bookMark_icon2, user_icon } from '../../assets';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from 'axios';
+import { LogOutPopup } from './Popup';
 
 function HomePageNav() {
     const menuRef = useRef();
     const navigate = useNavigate();
     const location = useLocation();
+    const [loading, setLoading] = useState(false);
+    const [isLogout, setLogout] = useState(false);
 
     const HomePageNavItem = ({ title, src, nav }) => {
 
@@ -34,18 +37,55 @@ function HomePageNav() {
         menuRef.current?.classList.remove('getMenu');
     }
 
+    const handleIsLogOut = () => {
+        setLogout(true)
+        document.body.style.overflow = 'hidden';
+    }
+
+    const handleCancelLogout = () => {
+        setLogout(false)
+        document.body.style.overflow = 'auto';
+    }
+
     const handleLogOut = async () => {
+        setLoading(true);
         try {
             await axios.post('https://trippa-fp9c.onrender.com/api/logout');
             localStorage.removeItem('token');
             navigate('/signIn-page');
         } catch (error) {
             console.error('Error logging out:', error);
+            setLoading(false);
+            document.body.style.overflow = 'auto';
+        } finally {
+            setLoading(false);
+            document.body.style.overflow = 'auto';
         }
     };
 
     if (location.pathname === '/signIn-page' || location.pathname === '/signUp-page') {
         handleLogOut();
+    }
+
+    if (loading) {
+        return (
+            <div className="absolute z-50 flex items-center justify-center h-[100vh] w-full lg:w-[1000px]">
+                <div className="flex justify-center w-full items-center bg-secondary max-w-[300px] sm:max-w-[400px] cursor-pointer h-[200px] rounded-[20px]">
+                    <FontAwesomeIcon icon="fa-solid fa-spinner" size="2x" spin />
+                </div>
+            </div>
+        );
+    }
+
+    if (isLogout) {
+        return (
+            <div className="absolute z-50 flex items-center justify-center h-[100vh] w-full lg:w-[1000px]">
+                <LogOutPopup
+                    cancelOnClick={handleCancelLogout}
+                    logoutOnclick={handleLogOut}
+                />
+            </div>
+        );
     }
 
     return (
@@ -56,21 +96,16 @@ function HomePageNav() {
                 </div>
                 <span className=" flex flex-col gap-6 justify-center">
                     <HomePageNavItem
-                        title="Saved Trips"
-                        src={bookMark_icon}
-                        nav="/saved_trips-page"
+                        title="Account"
+                        src={user_icon}
+                        nav="/user_profile-page"
                     />
                     <HomePageNavItem
                         title="Bookings"
                         src={bookMark_icon2}
                         nav="" // Specify where this option should navigate
                     />
-                    <HomePageNavItem
-                        title="Account"
-                        src={user_icon}
-                        nav="/user_profile-page"
-                    />
-                    <div className='flex items-center gap-5 cursor-pointer text-secondary' onClick={handleLogOut}>
+                    <div className='flex items-center gap-5 cursor-pointer text-secondary' onClick={handleIsLogOut}>
                         <FontAwesomeIcon icon="fa-solid fa-right-from-bracket" />
                         <span>LogOut</span>
                     </div>

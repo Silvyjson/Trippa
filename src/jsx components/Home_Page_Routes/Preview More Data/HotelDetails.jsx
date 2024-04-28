@@ -9,7 +9,7 @@ const HotelDetails = ({ hotelData }) => {
     const navigate = useNavigate();
     const { index } = useParams();
     const hotel = hotelData && hotelData[index];
-    const images = [hotel["PICTURES 1"], hotel["PICTURE 2"]]
+    const images = [hotel["PICTURE 1"], hotel["PICTURE 2"]]
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
     const handleLabelClick = (index) => {
@@ -62,7 +62,7 @@ const HotelDetails = ({ hotelData }) => {
                     <div className=" w-full flex flex-col gap-4 px-[30px]" >
                         <h1 className="self-start text-[18px]">Room Photos</h1>
                         <div className='flex flex-wrap items-center gap-[15px] w-full'>
-                            <img src={hotel["PICTURES 1"]} alt="" className='rounded-[20px] box_size_4 min-h-[150px] min-w-[150px]' />
+                            <img src={hotel["PICTURE 1"]} alt="" className='rounded-[20px] box_size_4 min-h-[150px] min-w-[150px]' />
                             <img src={hotel["PICTURE 2"]} alt="" className='rounded-[20px] box_size_4 min-h-[150px] min-w-[150px]' />
                         </div>
                     </div>

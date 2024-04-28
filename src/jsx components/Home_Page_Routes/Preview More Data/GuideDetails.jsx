@@ -55,8 +55,7 @@ const GuideDetails = ({ guideData, activityData }) => {
             <div className='flex items-center gap-[15px] w-full h-full'>
               {activity.map((activity, index) => (
                 <div key={index} className='relative flex flex-1 flex-col gap-3 rounded-[10px] py-[18px] px-[24px] bg-secondary box_size_1 min-w-[300px]'>
-                  <img src={activity["PICTURES 1"]} className=' box_size_2 bg-highlight_purple rounded-[10px]' />
-                  <FontAwesomeIcon icon="fa-regular fa-heart" className="absolute top-[30px] right-[40px]  text-primary text-[20px] cursor-pointer" />
+                  <img src={activity["PICTURE 1"]} className=' box_size_2 bg-highlight_purple rounded-[10px]' />
                   <div className='flex flex-col gap-3 w-full'>
                     <div className='flex justify-between items-center'>
                       <div className='flex flex-col justify-center items-start'>

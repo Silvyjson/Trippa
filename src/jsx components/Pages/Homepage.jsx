@@ -78,11 +78,11 @@ const Homepage = ({ activityData, hotelData, guideData, restaurantData }) => {
 
     if (loading) {
         return (
-          <p className="flex items-center justify-center h-[100vh] w-full">
-            <FontAwesomeIcon icon="fa-solid fa-spinner" size="2x" spin />
-          </p>
+            <p className="flex items-center justify-center h-[100vh] w-full">
+                <FontAwesomeIcon icon="fa-solid fa-spinner" size="2x" spin />
+            </p>
         );
-      }
+    }
 
     return (
         <section className='relative flex flex-col justify-center items-center h-full w-full'>

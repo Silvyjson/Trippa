@@ -9,7 +9,7 @@ const ActivityDetails = ({ activityData }) => {
   const navigate = useNavigate();
   const { index } = useParams();
   const activity = activityData && activityData[index];
-  const images = [activity["PICTURES 1"], activity["PICTURES 2"]]
+  const images = [activity["PICTURE 1"], activity["PICTURE 2"]]
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const handleLabelClick = (index) => {
@@ -44,7 +44,7 @@ const ActivityDetails = ({ activityData }) => {
           </div>
           <span className="flex items-center justify-between mx-[30px] my-[20px]">
             <span className='flex flex-col'>
-              <h2>{activity.NAMES}</h2>
+              <h2>{activity.NAME}</h2>
               <p className=''><FontAwesomeIcon icon="fa-solid fa-location-dot" className='mr-2' />{activity.ADDRESS}</p>
             </span>
             <p className='flex justify-end items-center self-start w-[30%]'>{activity.RATE}<FontAwesomeIcon icon="fa-solid fa-star" className='text-yellow-500' /></p>
@@ -57,8 +57,8 @@ const ActivityDetails = ({ activityData }) => {
             </div>
             <div className=" w-full" >
               <div className='flex flex-wrap items-center gap-[15px] w-full'>
-                <img src={activity["PICTURES 1"]} alt="" className='rounded-[20px] box_size_4 min-h-[150px] min-w-[150px]' />
-                <img src={activity["PICTURES 2"]} alt="" className='rounded-[20px] box_size_4 min-h-[150px] min-w-[150px]' />
+                <img src={activity["PICTURE 1"]} alt="" className='rounded-[20px] box_size_4 min-h-[150px] min-w-[150px]' />
+                <img src={activity["PICTURE 2"]} alt="" className='rounded-[20px] box_size_4 min-h-[150px] min-w-[150px]' />
               </div>
             </div>
           </div>

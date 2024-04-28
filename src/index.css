@@ -132,7 +132,7 @@ input[type="radio"] {
 
 ::-webkit-scrollbar {
     width: 5px;
-    height: 5px;
+    height: 4px;
   }
   
   ::-webkit-scrollbar-thumb {
