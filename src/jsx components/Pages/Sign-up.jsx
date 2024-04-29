@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { facebookIcon, googleIcon } from "../../assets";
+import { errorImg, facebookIcon, goodTick, googleIcon } from "../../assets";
 import ButtonProps, { InputProps, LoginOption } from "../Other component/Form";
 import axios from "axios";
+import Popup from "../Navigations/Popup";
 
 function SignUp() {
     const [formData, setFormData] = useState({
@@ -13,9 +14,9 @@ function SignUp() {
         password: ""
     });
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState(false);
     const [passwordError, setPasswordError] = useState();
-    const [isSignedIn, setIsSignedIn] = useState(null);
+    const [isSignedIn, setIsSignedIn] = useState(false);
     const navigate = useNavigate();
 
     const isPasswordValid = (password) => {
@@ -72,7 +73,7 @@ function SignUp() {
         <>
             {loading ? (
                 <p className="flex items-center justify-center h-[100vh] w-full">
-                    <FontAwesomeIcon icon="fa-solid fa-spinner" size="2x" spin/>
+                    <FontAwesomeIcon icon="fa-solid fa-spinner" size="2x" spin />
                 </p>
             ) : (
                 <>
@@ -82,10 +83,6 @@ function SignUp() {
                                 <h1 className="font-syne font-bold text-[30px]">Welcome to Trippa</h1>
                                 <p className="font-syne text-[20px] text-textColor">Sign up and start travelling the world</p>
                             </span>
-                            <div className="flex flex-col items-center">
-                                {error && <p className="text-red-500">{error}</p>}
-                                {isSignedIn && <span className="text-green-500">{isSignedIn}</span>}
-                            </div>
                             <form className="flex flex-col gap-7 w-full items-start sm:items-center">
                                 <InputProps
                                     label="First Name"
@@ -156,6 +153,29 @@ function SignUp() {
                             <span className="flex items-center justify-center w-full">
                                 <p className="font-syne text-[18px]">Already have an account? <span className="text-primary cursor-pointer" onClick={() => { navigate("/signIn-page") }}>Log in</span></p>
                             </span>
+
+                            {isSignedIn &&
+                                <div className="fixed z-50 flex items-center justify-center h-[100vh] w-full lg:w-[1000px]">
+                                    <Popup
+                                        src={goodTick}
+                                        message={isSignedIn}
+                                        nav="Login"
+                                        onClick={() => setIsSignedIn(false)}
+                                        className="w-[70px] h-[70px]"
+                                    />
+                                </div>
+                            }
+
+                            {error &&
+                                <div className="fixed z-50 flex items-center justify-center h-[100vh] w-full lg:w-[1000px]">
+                                    <Popup
+                                        src={errorImg}
+                                        message={error}
+                                        onClick={() => setError(false)}
+                                        className="w-[100px] h-[60px]"
+                                    />
+                                </div>
+                            }
                         </div>
                     </section>
                 </>

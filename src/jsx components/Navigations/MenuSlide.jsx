@@ -69,7 +69,7 @@ function HomePageNav() {
 
     if (loading) {
         return (
-            <div className="absolute z-50 flex items-center justify-center h-[100vh] w-full lg:w-[1000px]">
+            <div className="fixed z-50 flex items-center justify-center h-[100vh] w-full lg:w-[1000px]">
                 <div className="flex justify-center w-full items-center bg-secondary max-w-[300px] sm:max-w-[400px] cursor-pointer h-[200px] rounded-[20px]">
                     <FontAwesomeIcon icon="fa-solid fa-spinner" size="2x" spin />
                 </div>
@@ -79,7 +79,7 @@ function HomePageNav() {
 
     if (isLogout) {
         return (
-            <div className="absolute z-50 flex items-center justify-center h-[100vh] w-full lg:w-[1000px]">
+            <div className="fixed z-50 flex items-center justify-center h-[100vh] w-full lg:w-[1000px]">
                 <LogOutPopup
                     cancelOnClick={handleCancelLogout}
                     logoutOnclick={handleLogOut}

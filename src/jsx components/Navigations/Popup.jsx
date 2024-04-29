@@ -1,22 +1,23 @@
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ButtonProps from "../Other component/Form";
+import { useNavigate } from "react-router-dom";
 
 
-const Popup = ({ onClick, src, message, nav }) => {
-
+const Popup = ({ onClick, src, message, nav, className }) => {
+    const navigate = useNavigate()
 
     return (
-        <section className="flex items-center justify-center absolute w-full h-[120%] top-0 lg:w-[1000px]">
-            <div className="flex flex-col gap-3 justify-beyween w-full items-center bg-primary max-w-[400px] cursor-pointer h-[300px] rounded-[20px] text-secondary">
-                <FontAwesomeIcon icon="fa-solid fa-xmark" className="text-[30px] self-end mr-8 mt-5 opacity-[0.6] " onClick={onClick} />
-                <div className="flex flex-col gap-3 justify-center items-center w-full">
-                    <img src={src} alt="good tick" className="rounded-[50%] w-[80px] h-[50px]" />
-                    <p className="text-[20px]">{message}</p>
-                    <span className="inline-flex">{nav}</span>
-                </div>
+        <div className="relative flex flex-col gap-3 justify-beyween w-full items-center bg-primary p-5 max-w-[300px] sm:max-w-[400px] cursor-pointer h-[200px] rounded-[20px]  text-secondary">
+            <FontAwesomeIcon icon="fa-solid fa-xmark" className="text-[30px] absolute top-4 right-4 opacity-[0.6] " onClick={onClick} />
+            <div className="flex flex-col gap-3 justify-center items-center w-full">
+                <img src={src} alt="good tick" className={`rounded-[50%]  ${className}`} />
+                <p className="text-[20px] text-center">{message}</p>
+                {nav &&
+                    <span className="flex items-center text-red-500 text-[17px]" onClick={() => navigate('/signIn-page')}>{nav}<FontAwesomeIcon icon="fa-solid fa-arrow-right" className="ml-2" /></span>
+                }
             </div>
-        </section>
+        </div>
     )
 }
 
@@ -25,6 +26,7 @@ Popup.propTypes = {
     src: PropTypes.string.isRequired,
     message: PropTypes.string.isRequired,
     nav: PropTypes.string.isRequired,
+    className: PropTypes.string,
 }
 
 export const LogOutPopup = ({ cancelOnClick, logoutOnclick }) => {
