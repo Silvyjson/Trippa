@@ -52,7 +52,7 @@ function SignUp() {
         } catch (error) {
             if (error.response) {
                 if (error.response.status === 400) {
-                    setError(error.response?.data?.error?.message || 'User already exists. Please use a different email.');
+                    setError(error.response?.data?.error?.message || 'User already exists. Please Login.');
                 } else {
                     setError('An unexpected error occurred. Please try again.');
                 }

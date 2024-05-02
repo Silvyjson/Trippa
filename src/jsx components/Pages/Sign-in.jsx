@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { facebookIcon, googleIcon } from "../../assets";
+import { errorImg, facebookIcon, googleIcon } from "../../assets";
 import ButtonProps, { InputProps, LoginOption } from "../Other component/Form";
 import axios from "axios";
+import Popup from "../Navigations/Popup";
 
 function SignIn() {
     const navigate = useNavigate();
@@ -20,17 +21,24 @@ function SignIn() {
 
         try {
             const response = await axios.post('https://trippa-fp9c.onrender.com/api/login', formData);
-            if (response) {
-                console.log('login successful:', response.data);
-                const token = response.data.token;
-                localStorage.setItem('token', token);
-                navigate("/home-page");
-            } else {
-                setError('Invalid email or password');
-            }
+            console.log('login successful:', response.data);
+            const token = response.data.token;
+            localStorage.setItem('token', token);
+            navigate("/home-page");
         } catch (error) {
-            setError(error.response?.data?.error?.message || 'An unexpected error occurred. Please try again.');
+            if (error.response) {
+                if (error.response.status === 401) {
+                    setError(error.response?.data?.error?.message || 'Invalid Email or Password, Please check and try again.');
+                } else {
+                    setError('An unexpected error occurred. Please try again.');
+                }
+            } else if (error.request) {
+                setError('Network error. Please check your internet connection and try again.');
+            } else {
+                setError('An unexpected error occurred. Please try again.');
+            }
             console.error('Login error:', error);
+            setLoading(true);
         } finally {
             setLoading(false);
         }
@@ -49,7 +57,6 @@ function SignIn() {
                             <h1 className="font-syne font-bold text-[30px]">Welcome back to Trippa</h1>
                             <p className="font-syne text-[20px] text-textColor">Log in and don’t miss out</p>
                         </span>
-                        {error && <p>{error.response.data.error.message}</p>}
                         <form className="flex flex-col gap-7 w-full items-start sm:items-center">
                             <InputProps
                                 label="Email"
@@ -97,6 +104,17 @@ function SignIn() {
                         <span className="flex items-center justify-center mb-10 w-full">
                             <p className="font-syne text-[18px]">Don’t have an account?<span className="text-primary cursor-pointer" onClick={() => { navigate("/signUp-page") }}>Sign up</span></p>
                         </span>
+
+                        {error &&
+                            <div className="fixed z-50 flex items-center justify-center h-[100vh] w-full lg:w-[1000px]">
+                                <Popup
+                                    src={errorImg}
+                                    message={error}
+                                    onClick={() => setError(false)}
+                                    className="w-[100px] h-[60px]"
+                                />
+                            </div>
+                        }
                     </div>
                 </section>
             )}
