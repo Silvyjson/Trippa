@@ -77,9 +77,9 @@ function SignUp() {
                 </p>
             ) : (
                 <>
-                    <section className="block mx-auto my-10 w-[90%]">
-                        <div className="flex flex-col gap-10 sm:items-center">
-                            <span className="flex flex-col gap-3 sm:items-center">
+                    <section className="block mx-auto w-[90%]">
+                        <div className="flex flex-col gap-10 items-center">
+                            <span className="flex flex-col gap-3 mt-10 sm:items-center">
                                 <h1 className="font-syne font-bold text-[30px]">Welcome to Trippa</h1>
                                 <p className="font-syne text-[20px] text-textColor">Sign up and start travelling the world</p>
                             </span>
@@ -150,7 +150,7 @@ function SignUp() {
                                     label="Continue with Google"
                                 />
                             </div>
-                            <span className="flex items-center justify-center w-full">
+                            <span className="flex items-center justify-center mb-10 w-full">
                                 <p className="font-syne text-[18px]">Already have an account? <span className="text-primary cursor-pointer" onClick={() => { navigate("/signIn-page") }}>Log in</span></p>
                             </span>
 
