@@ -11,6 +11,14 @@ import axios from 'axios';
 const Homepage = ({ activityData, hotelData, guideData, restaurantData }) => {
     const [userName, setUserName] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [searchQuery, setSearchQuery] = useState('');
+    const [filteredData, setFilteredData] = useState({
+        activities: activityData,
+        hotels: hotelData,
+        guides: guideData,
+        restaurants: restaurantData
+    });
+
     const filterRef = useRef(null);
     const menuRef = useRef(null);
 
@@ -19,6 +27,9 @@ const Homepage = ({ activityData, hotelData, guideData, restaurantData }) => {
             setLoading(true);
             try {
                 const token = localStorage.getItem('token');
+                if (!token) {
+                    throw new Error("Token not found");
+                }
                 const response = await axios.get('https://trippa-fp9c.onrender.com/api/users/profile', {
                     headers: {
                         Authorization: `Bearer ${token}`
@@ -27,7 +38,7 @@ const Homepage = ({ activityData, hotelData, guideData, restaurantData }) => {
                 setUserName(response.data);
             } catch (error) {
                 console.error('Error fetching user profile:', error);
-                setLoading(false);
+                alert('Failed to fetch user profile. Please check your connection and login status.');
             } finally {
                 setLoading(false);
             }
@@ -65,6 +76,34 @@ const Homepage = ({ activityData, hotelData, guideData, restaurantData }) => {
         };
     }, []);
 
+    useEffect(() => {
+        const filterData = () => {
+            if (!searchQuery) {
+                setFilteredData({
+                    activities: activityData,
+                    hotels: hotelData,
+                    guides: guideData,
+                    restaurants: restaurantData
+                });
+                return;
+            }
+
+            const lowercasedQuery = searchQuery.toLowerCase();
+
+            const filterItems = (items) => {
+                return items.filter(item => item && item.NAME && item.NAME.toLowerCase().includes(lowercasedQuery));
+            };
+
+            setFilteredData({
+                activities: filterItems(activityData),
+                hotels: filterItems(hotelData),
+                guides: filterItems(guideData),
+                restaurants: filterItems(restaurantData)
+            });
+        };
+
+        filterData();
+    }, [searchQuery, activityData, hotelData, guideData, restaurantData]);
 
     const handleShowFilter = () => {
         const Filter = document.querySelector(`.filter`);
@@ -98,16 +137,22 @@ const Homepage = ({ activityData, hotelData, guideData, restaurantData }) => {
                     </div>
                     <span className='relative flex items-center gap-4'>
                         <img src={searchIcon} alt="search icon" className='absolute top-[16px] left-[10px]' />
-                        <input type="search" placeholder='Search' className='rounded-[8px] h-[48px] py-[8px] px-[30px] outline-none bg-search_input_color w-full' />
+                        <input
+                            type="search"
+                            placeholder='Search'
+                            className='rounded-[8px] h-[48px] py-[8px] px-[30px] outline-none bg-search_input_color w-full'
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                        />
                         <img src={filterIcon} alt="filter icon" onClick={handleShowFilter} className='w-[20px] cursor-pointer' />
                     </span>
                 </div>
                 <HomePageNav />
                 <HomePage_model
-                    activityData={activityData}
-                    hotelData={hotelData}
-                    guideData={guideData}
-                    restaurantData={restaurantData}
+                    activityData={filteredData.activities}
+                    hotelData={filteredData.hotels}
+                    guideData={filteredData.guides}
+                    restaurantData={filteredData.restaurants}
                 />
                 <Footer_nav />
                 <Filter />
